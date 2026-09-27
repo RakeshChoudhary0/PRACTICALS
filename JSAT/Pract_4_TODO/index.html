@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>MY TODO LIST</h2>
+    <div>
+      <input type="text" id="taskInput" placeholder="Enter New Task" />
+      <button id="addBtn">Add Task</button>
+    </div>
+    <p id="statsText">Total Task : 0</p>
+
+    <ul id="taskList"></ul>
+  </body>
+  <script>
+    const taskInput = document.getElementById("taskInput");
+    const addBtn = document.getElementById("addBtn");
+    const taskList = document.getElementById("taskList");
+    const statsText = document.getElementById("statsText");
+
+    let taskCount = 0;
+
+    const updateStats = () => {
+      statsText.textContent = `Total Task : ${taskCount}`;
+
+      if (taskCount === 0) {
+        statsText.style.color = "#888";
+      } else {
+        statsText.style.color = "#007bff";
+        statsText.style.fontWeight = "bold";
+      }
+    };
+
+    const addTask = () => {
+      const taskText = taskInput.value.trim();
+
+      if (taskText === "") {
+        alert("please Enter a Valid Task");
+        return;
+      }
+      const li = document.createElement("li");
+      const span = document.createElement("span");
+      const dltbtn = document.createElement("button");
+
+      span.textContent = taskText;
+      dltbtn.textContent = "Delete";
+
+      li.classList.add("todo-item");
+      dltbtn.classList.add("delete-btn");
+
+      span.addEventListener("click", () => {
+        li.classList.toggle("completed");
+      });
+
+      dltbtn.addEventListener("click", () => {
+        li.remove();
+        taskCount--;
+        updateStats();
+      });
+
+      li.appendChild(span);
+      li.appendChild(dltbtn);
+
+      taskList.appendChild(li);
+      taskInput.value = "";
+      taskCount++;
+      updateStats();
+    };
+
+    addBtn.addEventListener("click", addTask);
+    taskInput.addEventListener("keydown", (e) => {
+      if (e.key == "Enter") {
+        addTask();
+      }
+    });
+  </script>
+</html>

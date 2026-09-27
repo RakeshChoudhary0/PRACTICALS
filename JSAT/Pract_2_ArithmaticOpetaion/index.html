@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arithmatic Operations - Simple Calculator</title>
+    <style>
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        border: 2px solid rgba(0, 0, 0, 0.347);
+        background-color: rgba(0, 145, 255, 0.144);
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+        border-radius: 20px;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input id="n1" type="text" placeholder="Enter Number 1" />
+      <input id="n2" type="text" placeholder="Enter Number 2" />
+      <select id="option">
+        <option value="+">Addition</option>
+        <option value="-">Substraction</option>
+        <option value="*">Multiplication</option>
+        <option value="/">Divide</option>
+      </select>
+      <button id="btn">ANSWER</button>
+      <div id="Answer"></div>
+    </div>
+  </body>
+
+  <script>
+    const n1 = document.getElementById("n1");
+    const n2 = document.getElementById("n2");
+    const option = document.getElementById("option");
+    const btn = document.getElementById("btn");
+    const Answer = document.getElementById("Answer");
+
+    btn.addEventListener("click", () => {
+      const num1 = parseFloat(n1.value);
+      const num2 = parseFloat(n2.value);
+      const opr = option.value;
+      console.log(num1, num2, opr);
+
+      if (isNaN(num1) || isNaN(num2)) {
+        Answer.innerText = "Please Enter an Valid Number";
+      }
+      let result = "";
+      switch (opr) {
+        case "+":
+          result = num1 + num2;
+          break;
+
+        case "-":
+          result = num1 - num2;
+          break;
+
+        case "*":
+          result = num1 * num2;
+          break;
+
+        case "/":
+          if (num2 == 0) {
+            Answer.innerText = "Error: Division by zero is not allowed";
+            break;
+          }
+          result = num1 / num2;
+          break;
+      }
+
+      Answer.innerText = `Result: ${result}`;
+    });
+  </script>
+</html>
