@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    #container {
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+      gap: 20px;
+    }
+
+    .task {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      width: 400px;
+      background-color: aliceblue;
+      border: #5a5a5a;
+      border-radius: 20px;
+    }
+    .task p {
+      font-size: 24px;
+      color: #5a5a5a;
+    }
+
+    .task span {
+      font-size: 17;
+      color: #888;
+    }
+  </style>
+  <body>
+    <h2>You can Find My TODO list Here</h2>
+    <button onclick="getTODO()">CLICK HERE TO GET</button>
+    <div id="container"></div>
+  </body>
+  <script>
+    const container = document.getElementById("container");
+
+    const getTODO = async () => {
+      try {
+        console.log("Fetching todos...");
+        const res = await fetch("/todo");
+        const { data } = await res.json();
+
+        container.innerHTML = "";
+
+        data.forEach((todo) => {
+          const div = document.createElement("div");
+          div.className = "task";
+
+          const p = document.createElement("p");
+          p.innerText = todo?.title;
+          p.className = "task-title";
+
+          const span = document.createElement("span");
+          span.innerText = `COMPLETED:- ${todo?.completed}`;
+          span.className = "task-status";
+
+          div.appendChild(p);
+          div.appendChild(span);
+          container.appendChild(div);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  </script>
+</html>
