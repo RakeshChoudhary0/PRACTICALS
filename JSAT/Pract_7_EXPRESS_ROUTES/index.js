@@ -1,11 +1,13 @@
 const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
-const { title } = require("process");
+
 const app = express();
 
 app.set("view engine", "hbs");
+
 app.set("Views", path.join(__dirname, "Views"));
+hbs.registerPartials(path.join(__dirname, "Views", "Partials"));
 
 app.use(express.static(path.join(__dirname, "Public")));
 
