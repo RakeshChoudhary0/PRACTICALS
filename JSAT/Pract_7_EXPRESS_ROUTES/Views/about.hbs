@@ -9,6 +9,14 @@
     <h1>About</h1>
     {{title}}
     <h2>{{discription}}</h2>
+
+    {{#each data}}
+    <div>
+      <p>{{this.title}}</p>
+      <p>{{this.desc}}</p>
+    </div>
+    {{/each}}
+ 
     {{>header}}
   </body>
 </html>
