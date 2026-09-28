@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "chai": "^6.2.2"
+  },
+  "name": "pract_13_chai_mocha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mocha_expect.js",
+  "files": [
+    "mocha_expect.js",
+    "mocha_should.js",
+    "mocha_assert.js"
+  ],
+  "devDependencies": {},
+  "scripts": {
+    "test-expect": "npx mocha mocha_expect.js",
+    "test-should": "npx mocha mocha_should.js",
+    "test-assert": "npx mocha mocha_assert.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

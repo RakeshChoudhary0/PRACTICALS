@@ -26,6 +26,29 @@ app.get("/", (req, res) => {
   });
 });
 
+// Dyanimc Routing
+app.get("/users/:id", (req, res) => {
+  const userId = req.params.id;
+
+  return res.status(200).json({
+    success: true,
+    message: `Details for User ID: ${userId}`,
+    userId: userId,
+  });
+});
+
+// Query Params
+// /search?term=laptop&limit=80
+app.get("/search", (req, res) => {
+  const { term, limit } = req.query;
+
+  return res.status(200).json({
+    success: true,
+    searchTerm: term || "mobile",
+    searchLimit: limit || 10,
+  });
+});
+
 app.listen(9000, () => {
   console.log("The Server is Runing on port no. 9000");
 });
